@@ -23,5 +23,15 @@ router.post('/', async (req, res) => {
   }
 });
 
+// POST /products/bulk - insert multiple products
+router.post('/bulk', async (req, res) => {
+  try {
+    const products = await Product.insertMany(req.body);
+    res.status(201).json(products);
+  } catch (err) {
+    res.status(500).json({ error: 'Bulk insert failed', details: err });
+  }
+});
+
 module.exports = router;
 
