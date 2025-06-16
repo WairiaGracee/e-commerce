@@ -5,7 +5,7 @@ const mongoose = require('mongoose');//import mongoose for mongoDB
 
 const productRoutes = require('./routes/products')
 
-const app = express();//initialize express
+const app = express();//initialize express--creates an instance of a web server using express
 const PORT = process.env.PORT || 5000;//tells the app what port it runs on
 
 // Connect to MongoDB
@@ -19,6 +19,16 @@ app.use(express.json());
 
 // Use routes
 app.use('/products', productRoutes); // <-- Mount route
+
+app.get('/', async (req, res) => {
+    try {
+        const Product = require('./models/product'); // Import the model
+        const products = await Product.find(); // Fetch from MongoDB
+        res.json(products);
+    } catch (err) {
+        res.status(500).json({ error: 'Server error' });
+    }
+});
 
 // Start server
 app.listen(PORT, () => {

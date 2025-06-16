@@ -1,18 +1,22 @@
-const products = [
-    {
-        id: 1,
-        name: 'Cotton T-shirt',
-        price: 1200,
-        description: 'High-quality cotton T-shirt',
-        image: 'https://example.com/shirt.jpg'
-    },
-    {
-        id: 2,
-        name: 'Blue Denim Jeans',
-        price: 2500,
-        description: 'Stylish denim jeans',
-        image: 'https://example.com/jeans.jpg'
-    }
-];
+const mongoose = require('mongoose');
 
-module.exports = products;
+// Define the product schema
+const productSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    },
+    description: String,
+    image: String,
+}, {
+  timestamps: true // adds createdAt and updatedAt fields
+});
+
+// Create the model
+const Product = mongoose.model('Product', productSchema);
+
+module.exports = Product;

@@ -1,10 +1,27 @@
 const express = require('express');
 const router = express.Router();
-const products = require('../models/product'); // import data
+const Product = require('../models/product'); // import mongoose model
 
-// GET /products
-router.get('/', (req, res) => {
-  res.json(products); // send product data as JSON
+// GET /products - fetch all products from MongoDB
+router.get('/', async (req, res) => {
+  try {
+    const products = await Product.find(); // fetch from MongoDB
+    res.json(products);
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// POST /products - add a new product to MongoDB
+router.post('/', async (req, res) => {
+  try {
+    const newProduct = new Product(req.body);
+    const savedProduct = await newProduct.save();
+    res.status(201).json(savedProduct);
+  } catch (err) {
+    res.status(400).json({ error: 'Failed to create product' });
+  }
 });
 
 module.exports = router;
+
