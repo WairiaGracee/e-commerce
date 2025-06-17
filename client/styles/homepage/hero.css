@@ -1,0 +1,30 @@
+.hero{
+    padding-top: 2rem;
+    background-color: rgba(173, 174, 175,0.15);
+}
+.heroWrap{
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 20px;
+    align-items: center;
+}
+.hero-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    font-family: "Host Grotesk", sans-serif;
+}
+.hero-content h2{
+    font-size: 3em;
+    text-align: center;
+}
+.hero-content button{
+    background-color: #000;
+    color: aliceblue;
+    border-radius: 2px;
+    padding: 0.95rem 1.3rem;
+    border: none;
+    color: 0.8em;
+}
