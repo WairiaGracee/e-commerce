@@ -1,26 +1,36 @@
-document.addEventListener('DOMContentLoaded', function(){
-    const overlay = document.querySelector('.overlay');
-    const header = document.getElementById('header')
-    const navLinks = document.querySelector('.nav-links')
-    const cart = document.querySelector('.carthide')
-    const menu = document.getElementById('menu')
-    const logo = document.querySelector('.logo')
+document.addEventListener('DOMContentLoaded', function () {
+    const nav = document.querySelector('.nav');
+    const closeBtn = document.querySelector('.hiddenMenu');
+    const menuBtn = document.getElementById('menu-display');
+    const header = document.querySelector('.header');
 
-    menu.addEventListener('click', function(){
-        overlay.classList.add('active');
-        navLinks.classList.add('active');
-        logo.classList.add('hide');
-        cart.classList.add('hide');
-    })
+    // Initially hide nav and close button
+    nav.classList.remove('active'); // Only use .active for animation
+    closeBtn.classList.add('hide');
 
-    // Click outside sidebar to close
-    overlay.addEventListener('click', function(e) {
-        if (!navLinks.contains(e.target)) {
-        overlay.classList.remove('active');
-        navLinks.classList.remove('active');
-        logo.classList.remove('hide');
-        cart.classList.remove('hide');
-        }
+    menuBtn.addEventListener('click', function () {
+        nav.classList.add('active'); // Show nav
+        closeBtn.classList.remove('hide');
+        menuBtn.classList.add('hide');
     });
 
-})
+    closeBtn.addEventListener('click', function () {
+        nav.classList.remove('active'); // Hide nav
+        closeBtn.classList.add('hide');
+        menuBtn.classList.remove('hide');
+    });
+
+    window.addEventListener('resize', function () {
+    if (window.innerWidth >= 768) {
+        document.querySelector('.nav').classList.add('active');
+        document.querySelector('.nav').classList.remove('hide');
+        document.querySelector('.hiddenMenu').classList.add('hide');
+        document.getElementById('menu-display').classList.add('hide');
+    }else {
+        nav.classList.remove('active');
+        closeBtn.classList.add('hide');
+        menuBtn.classList.remove('hide');
+    }
+});
+
+});
